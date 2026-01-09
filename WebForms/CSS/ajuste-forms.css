@@ -1,0 +1,48 @@
+﻿.form-group {
+    width: 100% !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+    .form-group .control-label {
+        text-align: left !important;
+        float: left !important;
+    }
+
+    .form-group input.disabled {
+        background-color: #d5d5d5 !important;
+    }
+
+    .form-group .input-lg-style {
+        margin-bottom: 0px !important;
+    }
+
+    .form-group h3 {
+        margin-top: 1.25rem !important;
+        margin-bottom: 0px !important;
+    }
+
+    .button-container {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .button-container .btn {
+        width: 200px;
+    }
+
+    .gv-icon-cell {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .gv-icon-cell i {
+        font-size: 1.3rem;
+        line-height: 1;
+    }
+
+@media (max-width: 750px) {
+    #frmForm {
+        width: 100% !important;
+    }
+}

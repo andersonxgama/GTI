@@ -31,5 +31,28 @@ namespace WebMVC.Services
                 }
             }
         }
+
+        public async Task<Cliente> CreateClienteAsync(Cliente cliente)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PostAsJsonAsync("", cliente);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    // Lê o cliente criado com endereço de volta da API
+                    var createdCliente = await response.Content.ReadAsAsync<Cliente>();
+                    return createdCliente;
+                }
+                else
+                {
+                    throw new Exception("Erro ao criar cliente: " + response.StatusCode);
+                }
+            }
+        }
     }
 }

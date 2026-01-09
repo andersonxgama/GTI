@@ -7,7 +7,7 @@ namespace WebAPI.Models
     [Table("Endereco")]
     public class Endereco
     {
-        [Key, ForeignKey("Cliente")] // <-- Chave primária e estrangeira do Cliente
+        [Key, ForeignKey("Cliente")]
         public int ClienteId { get; set; }
 
         [Required]
@@ -32,7 +32,7 @@ namespace WebAPI.Models
         [MaxLength(2)]
         public string UF { get; set; }
 
-        [JsonIgnore] // evita loop de serialização
+        [JsonIgnore]
         public virtual Cliente Cliente { get; set; }
     }
 }

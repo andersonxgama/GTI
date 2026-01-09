@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
             return _context.Clientes.ToList();
         }
 
-        // GET: api/clientes/5
+        // GET: api/clientes/{id}
         [HttpGet, Route("{id:int}")]
         public IHttpActionResult Get(int id)
         {
@@ -36,14 +36,16 @@ namespace WebAPI.Controllers
         [HttpPost, Route("")]
         public IHttpActionResult Post(Cliente cliente)
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid)
+                return BadRequest(string.Join("; ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage)));
 
             _context.Clientes.Add(cliente);
             _context.SaveChanges();
-            return CreatedAtRoute("DefaultApi", new { id = cliente.Id }, cliente);
+            return Ok(cliente);
         }
 
-        // PUT: api/clientes/5
+
+        // PUT: api/clientes/{id}
         [HttpPut, Route("{id:int}")]
         public IHttpActionResult Put(int id, Cliente cliente)
         {
@@ -77,7 +79,7 @@ namespace WebAPI.Controllers
             return Ok(existing);
         }
 
-        // DELETE: api/clientes/5
+        // DELETE: api/clientes/{id}
         [HttpDelete, Route("{id:int}")]
         public IHttpActionResult Delete(int id)
         {

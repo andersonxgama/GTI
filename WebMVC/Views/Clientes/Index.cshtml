@@ -1,23 +1,149 @@
-@model IEnumerable<WebMVC.Models.Cliente>
+@model List<WebMVC.Models.Cliente>
 
-<h2>Clientes</h2>
+@{
+    ViewBag.Title = "Clientes";
+}
 
-<table border="1">
-    <tr>
-        <th>Id</th>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>RG</th>
-        <th>Endereço</th>
-    </tr>
-    @foreach (var c in Model)
+<link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-4">
+    <h2>Cliente</h2>
+
+    @if (ViewBag.Error != null)
     {
-        <tr>
-            <td>@c.Id</td>
-            <td>@c.Nome</td>
-            <td>@c.CPF</td>
-            <td>@c.RG</td>
-            <td>@c.Endereco?.Logradouro, @c.Endereco?.Numero</td>
-        </tr>
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
     }
-</table>
+
+    @using (Html.BeginForm("Create", "Clientes", FormMethod.Post, new { @id = "formCliente" }))
+    {
+        <!-- CLIENTE -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.FirstOrDefault().CPF)
+                @Html.TextBox("CPF", null, new { @class = "form-control", maxlength = 14 })
+            </div>
+            <div class="col-md-8">
+                @Html.LabelFor(m => m.FirstOrDefault().Nome)
+                @Html.TextBox("Nome", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.FirstOrDefault().RG)
+                @Html.TextBox("RG", null, new { @class = "form-control", maxlength = 12 })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.FirstOrDefault().DataExpedicao)
+                @Html.TextBox("DataExpedicao", null, new { @type = "date", @class = "form-control" })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.FirstOrDefault().OrgaoExpedicao)
+                @Html.TextBox("OrgaoExpedicao", null, new { @class = "form-control" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.FirstOrDefault().UFExpedicao)
+                @Html.TextBox("UFExpedicao", null, new { @class = "form-control", maxlength = 2 })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.FirstOrDefault().DataNascimento)
+                @Html.TextBox("DataNascimento", null, new { @type = "date", @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.FirstOrDefault().Sexo)
+                @Html.DropDownList("Sexo", new List<SelectListItem>
+                {
+                    new SelectListItem { Text = "Selecione", Value = "" },
+                    new SelectListItem { Text = "Masculino", Value = "M" },
+                    new SelectListItem { Text = "Feminino", Value = "F" }
+                }, new { @class = "form-control" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.FirstOrDefault().EstadoCivil)
+                @Html.TextBox("EstadoCivil", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- ENDEREÇO -->
+        <h3>Endereço</h3>
+        <div class="row mb-3">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.FirstOrDefault().Endereco.CEP)
+                @Html.TextBox("Endereco.CEP", null, new { @class = "form-control", maxlength = 9 })
+            </div>
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Logradouro)
+                @Html.TextBox("Endereco.Logradouro", null, new { @class = "form-control" })
+            </div>
+            <div class="col-md-1">
+                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Numero)
+                @Html.TextBox("Endereco.Numero", null, new { @class = "form-control" })
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Complemento)
+                @Html.TextBox("Endereco.Complemento", null, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Bairro)
+                @Html.TextBox("Endereco.Bairro", null, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Cidade)
+                @Html.TextBox("Endereco.Cidade", null, new { @class = "form-control" })
+            </div>
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.FirstOrDefault().Endereco.UF)
+                @Html.TextBox("Endereco.UF", null, new { @class = "form-control", maxlength = 2 })
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg">Salvar</button>
+    }
+
+    <hr />
+
+    <!-- GRID DE CLIENTES -->
+    <h3>Clientes Cadastrados</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Nome)</th>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().CPF)</th>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().RG)</th>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().DataNascimento)</th>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Sexo)</th>
+                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().EstadoCivil)</th>
+                <th>Endereço</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(mItem => cliente.Nome)</td>
+                    <td>@Html.DisplayFor(mItem => cliente.CPF)</td>
+                    <td>@Html.DisplayFor(mItem => cliente.RG)</td>
+                    <td>@cliente.DataNascimento.ToString("dd/MM/yyyy")</td>
+                    <td>@Html.DisplayFor(mItem => cliente.Sexo)</td>
+                    <td>@Html.DisplayFor(mItem => cliente.EstadoCivil)</td>
+                    <td>
+                        @(cliente.Endereco != null ? $"{cliente.Endereco.Logradouro}, {cliente.Endereco.Numero}, {cliente.Endereco.Bairro}, {cliente.Endereco.Cidade} - {cliente.Endereco.UF}" : "")
+                    </td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">Editar</button>
+                        <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

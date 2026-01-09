@@ -1,0 +1,23 @@
+@model IEnumerable<WebMVC.Models.Cliente>
+
+<h2>Clientes</h2>
+
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>RG</th>
+        <th>Endereço</th>
+    </tr>
+    @foreach (var c in Model)
+    {
+        <tr>
+            <td>@c.Id</td>
+            <td>@c.Nome</td>
+            <td>@c.CPF</td>
+            <td>@c.RG</td>
+            <td>@c.Endereco?.Logradouro, @c.Endereco?.Numero</td>
+        </tr>
+    }
+</table>

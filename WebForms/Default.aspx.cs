@@ -106,10 +106,10 @@ namespace WebForm
                 txtNome.Text = cliente.Nome;
                 txtCpf.Text = cliente.CPF;
                 txtRg.Text = cliente.RG;
-                txtDataExpedicao.Text = cliente.DataExpedicao.ToString("yyyy-MM-dd");
+                txtDataExpedicao.Text = cliente.DataExpedicao.ToString("dd/MM/yyyy");
                 txtOrgaoExpedicao.Text = cliente.OrgaoExpedicao;
                 txtUfExpedicao.Text = cliente.UFExpedicao;
-                txtDataNascimento.Text = cliente.DataNascimento.ToString("yyyy-MM-dd");
+                txtDataNascimento.Text = cliente.DataNascimento.ToString("dd/MM/yyyy");
                 ddlSexo.SelectedValue = cliente.Sexo;
                 txtEstadoCivil.Text = cliente.EstadoCivil;
 

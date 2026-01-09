@@ -24,6 +24,15 @@ namespace WebForm
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+
+        /// <summary>
         /// txtCpf control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,24 @@ namespace WebForm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCpf;
+
+        /// <summary>
+        /// meeCpf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender meeCpf;
+
+        /// <summary>
+        /// mevCpf control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditValidator mevCpf;
 
         /// <summary>
         /// txtNome control.
@@ -42,6 +69,15 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.TextBox txtNome;
 
         /// <summary>
+        /// valNome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valNome;
+
+        /// <summary>
         /// txtRg control.
         /// </summary>
         /// <remarks>
@@ -49,6 +85,24 @@ namespace WebForm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtRg;
+
+        /// <summary>
+        /// meeRg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender meeRg;
+
+        /// <summary>
+        /// mevRg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditValidator mevRg;
 
         /// <summary>
         /// txtDataExpedicao control.
@@ -60,6 +114,24 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.TextBox txtDataExpedicao;
 
         /// <summary>
+        /// meeDataExp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender meeDataExp;
+
+        /// <summary>
+        /// valDataExp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator valDataExp;
+
+        /// <summary>
         /// txtOrgaoExpedicao control.
         /// </summary>
         /// <remarks>
@@ -67,6 +139,15 @@ namespace WebForm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtOrgaoExpedicao;
+
+        /// <summary>
+        /// valOrgao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valOrgao;
 
         /// <summary>
         /// txtUfExpedicao control.
@@ -78,6 +159,15 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.TextBox txtUfExpedicao;
 
         /// <summary>
+        /// valUfExpedicao control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valUfExpedicao;
+
+        /// <summary>
         /// txtDataNascimento control.
         /// </summary>
         /// <remarks>
@@ -85,6 +175,24 @@ namespace WebForm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDataNascimento;
+
+        /// <summary>
+        /// meeDataNasc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.MaskedEditExtender meeDataNasc;
+
+        /// <summary>
+        /// valDataNasc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator valDataNasc;
 
         /// <summary>
         /// ddlSexo control.
@@ -96,6 +204,15 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.DropDownList ddlSexo;
 
         /// <summary>
+        /// valSexo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valSexo;
+
+        /// <summary>
         /// txtEstadoCivil control.
         /// </summary>
         /// <remarks>
@@ -103,6 +220,15 @@ namespace WebForm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtEstadoCivil;
+
+        /// <summary>
+        /// valEstadoCivil control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valEstadoCivil;
 
         /// <summary>
         /// txtCEP control.
@@ -114,6 +240,15 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.TextBox txtCEP;
 
         /// <summary>
+        /// valCEP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valCEP;
+
+        /// <summary>
         /// txtLogradouro control.
         /// </summary>
         /// <remarks>
@@ -123,6 +258,15 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.TextBox txtLogradouro;
 
         /// <summary>
+        /// valLogradouro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valLogradouro;
+
+        /// <summary>
         /// txtNumero control.
         /// </summary>
         /// <remarks>
@@ -130,6 +274,15 @@ namespace WebForm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumero;
+
+        /// <summary>
+        /// valNumero control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valNumero;
 
         /// <summary>
         /// txtComplemento control.
@@ -150,6 +303,15 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.TextBox txtBairro;
 
         /// <summary>
+        /// valBairro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valBairro;
+
+        /// <summary>
         /// txtCidade control.
         /// </summary>
         /// <remarks>
@@ -159,6 +321,15 @@ namespace WebForm
         protected global::System.Web.UI.WebControls.TextBox txtCidade;
 
         /// <summary>
+        /// valCidade control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator valCidade;
+
+        /// <summary>
         /// txtUF control.
         /// </summary>
         /// <remarks>
@@ -166,6 +337,15 @@ namespace WebForm
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtUF;
+
+        /// <summary>
+        /// valUF control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator valUF;
 
         /// <summary>
         /// btnSalvar control.

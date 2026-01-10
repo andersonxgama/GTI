@@ -1,0 +1,128 @@
+﻿@model WebMVC.Models.Cliente
+
+@{
+    ViewBag.Title = "Editar Cliente";
+}
+
+<link href="~/CSS/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container mt-4">
+    <h2>Editar Cliente</h2>
+
+    @using (Html.BeginForm("Edit", "Clientes", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.Id)
+
+        <!-- CLIENTE -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.CPF)
+                @Html.TextBoxFor(m => m.CPF, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-8">
+                @Html.LabelFor(m => m.Nome)
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.RG)
+                @Html.TextBoxFor(m => m.RG, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.DataExpedicao)
+                @Html.TextBoxFor(m => m.DataExpedicao, "{0:yyyy-MM-dd}",
+                         new { @type = "date", @class = "form-control" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.OrgaoExpedicao)
+                @Html.TextBoxFor(m => m.OrgaoExpedicao, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.UFExpedicao)
+                @Html.TextBoxFor(m => m.UFExpedicao, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.DataNascimento)
+                @Html.TextBoxFor(m => m.DataNascimento, "{0:yyyy-MM-dd}",
+                         new { @type = "date", @class = "form-control" })
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.Sexo)
+                @Html.DropDownListFor(m => m.Sexo,
+                         new SelectList(
+                             new[]
+                             {
+                            new { Value = "M", Text = "Masculino" },
+                            new { Value = "F", Text = "Feminino" }
+                             },
+                             "Value",
+                             "Text",
+                             Model.Sexo
+                         ),
+                         "Selecione",
+                         new { @class = "form-control" }
+                     )
+            </div>
+
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.EstadoCivil)
+                @Html.TextBoxFor(m => m.EstadoCivil, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <!-- ENDEREÇO -->
+        <h4>Endereço</h4>
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                @Html.LabelFor(m => m.Endereco.CEP)
+                @Html.TextBoxFor(m => m.Endereco.CEP, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-5">
+                @Html.LabelFor(m => m.Endereco.Logradouro)
+                @Html.TextBoxFor(m => m.Endereco.Logradouro, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Endereco.Numero)
+                @Html.TextBoxFor(m => m.Endereco.Numero, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Endereco.UF)
+                @Html.TextBoxFor(m => m.Endereco.UF, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.Endereco.Bairro)
+                @Html.TextBoxFor(m => m.Endereco.Bairro, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.Endereco.Cidade)
+                @Html.TextBoxFor(m => m.Endereco.Cidade, new { @class = "form-control" })
+            </div>
+
+            <div class="col-md-4">
+                @Html.LabelFor(m => m.Endereco.Complemento)
+                @Html.TextBoxFor(m => m.Endereco.Complemento, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Salvar Alterações</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Voltar</a>
+    }
+</div>

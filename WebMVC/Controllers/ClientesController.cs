@@ -69,5 +69,49 @@ namespace WebMVC.Controllers
                 return View("Index", clientes);
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(Cliente cliente)
+        {
+            try
+            {
+                if (cliente == null || cliente.Id == 0)
+                {
+                    ViewBag.Error = "Cliente inválido para edição.";
+                    var clientes = await _apiService.GetClientesAsync();
+                    return View("Index", clientes);
+                }
+
+                // Ajusta os trims igual no Create
+                cliente.CPF = cliente.CPF?.Trim();
+                cliente.RG = cliente.RG?.Trim();
+                cliente.Nome = cliente.Nome?.Trim();
+                cliente.OrgaoExpedicao = cliente.OrgaoExpedicao?.Trim();
+                cliente.UFExpedicao = cliente.UFExpedicao?.Trim().ToUpper();
+                cliente.EstadoCivil = cliente.EstadoCivil?.Trim();
+
+                if (cliente.Endereco != null)
+                {
+                    cliente.Endereco.CEP = cliente.Endereco.CEP?.Trim();
+                    cliente.Endereco.Logradouro = cliente.Endereco.Logradouro?.Trim();
+                    cliente.Endereco.Numero = cliente.Endereco.Numero?.Trim();
+                    cliente.Endereco.Complemento = cliente.Endereco.Complemento?.Trim();
+                    cliente.Endereco.Bairro = cliente.Endereco.Bairro?.Trim();
+                    cliente.Endereco.Cidade = cliente.Endereco.Cidade?.Trim();
+                    cliente.Endereco.UF = cliente.Endereco.UF?.Trim().ToUpper();
+                }
+
+                await _apiService.UpdateClienteAsync(cliente);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = "Erro ao editar cliente: " + ex.Message;
+                var clientes = await _apiService.GetClientesAsync();
+                return View("Index", clientes);
+            }
+        }
+
     }
 }

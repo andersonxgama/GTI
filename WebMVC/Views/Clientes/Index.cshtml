@@ -9,15 +9,11 @@
 <div class="container mt-4">
     <h2>Cliente</h2>
 
-    @if (ViewBag.Error != null)
-    {
-        <div class="alert alert-danger">
-            @ViewBag.Error
-        </div>
-    }
-
     @using (Html.BeginForm("Create", "Clientes", FormMethod.Post, new { @id = "formCliente" }))
     {
+        @* Campo escondido para o Id do cliente *@
+        <input type="hidden" name="Id" />
+
         <!-- CLIENTE -->
         <div class="row mb-3">
             <div class="col-md-4">
@@ -128,7 +124,23 @@
         <tbody>
             @foreach (var cliente in Model)
             {
-                <tr>
+                <tr data-id="@cliente.Id"
+                    data-cpf="@cliente.CPF"
+                    data-nome="@cliente.Nome"
+                    data-rg="@cliente.RG"
+                    data-dataexpedicao="@cliente.DataExpedicao.ToString("yyyy-MM-dd")"
+                    data-orgao="@cliente.OrgaoExpedicao"
+                    data-ufexpedicao="@cliente.UFExpedicao"
+                    data-datanascimento="@cliente.DataNascimento.ToString("yyyy-MM-dd")"
+                    data-sexo="@cliente.Sexo"
+                    data-estadocivil="@cliente.EstadoCivil"
+                    data-cep="@cliente.Endereco?.CEP"
+                    data-logradouro="@cliente.Endereco?.Logradouro"
+                    data-numero="@cliente.Endereco?.Numero"
+                    data-complemento="@cliente.Endereco?.Complemento"
+                    data-bairro="@cliente.Endereco?.Bairro"
+                    data-cidade="@cliente.Endereco?.Cidade"
+                    data-uf="@cliente.Endereco?.UF">
                     <td>@Html.DisplayFor(mItem => cliente.Nome)</td>
                     <td>@Html.DisplayFor(mItem => cliente.CPF)</td>
                     <td>@Html.DisplayFor(mItem => cliente.RG)</td>
@@ -139,7 +151,7 @@
                         @(cliente.Endereco != null ? $"{cliente.Endereco.Logradouro}, {cliente.Endereco.Numero}, {cliente.Endereco.Bairro}, {cliente.Endereco.Cidade} - {cliente.Endereco.UF}" : "")
                     </td>
                     <td>
-                        <button class="btn btn-sm btn-outline-primary">Editar</button>
+                        <button type="button" class="btn btn-sm btn-outline-primary btnEditar">Editar</button>
                         <button class="btn btn-sm btn-outline-danger">Excluir</button>
                     </td>
                 </tr>
@@ -147,3 +159,35 @@
         </tbody>
     </table>
 </div>
+
+@section scripts {
+    <script>
+        document.querySelectorAll(".btnEditar").forEach(btn => {
+            btn.addEventListener("click", function () {
+                const row = btn.closest("tr");
+                const form = document.getElementById("formCliente");
+
+                form.querySelector("input[name='Id']").value = row.dataset.id;
+                form.querySelector("input[name='CPF']").value = row.dataset.cpf;
+                form.querySelector("input[name='Nome']").value = row.dataset.nome;
+                form.querySelector("input[name='RG']").value = row.dataset.rg;
+                form.querySelector("input[name='DataExpedicao']").value = row.dataset.dataexpedicao;
+                form.querySelector("input[name='OrgaoExpedicao']").value = row.dataset.orgao;
+                form.querySelector("input[name='UFExpedicao']").value = row.dataset.ufexpedicao;
+                form.querySelector("input[name='DataNascimento']").value = row.dataset.datanascimento;
+                form.querySelector("select[name='Sexo']").value = row.dataset.sexo;
+                form.querySelector("input[name='EstadoCivil']").value = row.dataset.estadocivil;
+                form.querySelector("input[name='Endereco.CEP']").value = row.dataset.cep;
+                form.querySelector("input[name='Endereco.Logradouro']").value = row.dataset.logradouro;
+                form.querySelector("input[name='Endereco.Numero']").value = row.dataset.numero;
+                form.querySelector("input[name='Endereco.Complemento']").value = row.dataset.complemento;
+                form.querySelector("input[name='Endereco.Bairro']").value = row.dataset.bairro;
+                form.querySelector("input[name='Endereco.Cidade']").value = row.dataset.cidade;
+                form.querySelector("input[name='Endereco.UF']").value = row.dataset.uf;
+
+                // Muda a action do form pra Edit
+                form.action = '/Clientes/Edit';
+            });
+        });
+    </script>
+}

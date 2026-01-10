@@ -54,5 +54,28 @@ namespace WebMVC.Services
                 }
             }
         }
+
+        public async Task<Cliente> UpdateClienteAsync(Cliente cliente)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PutAsJsonAsync(cliente.Id.ToString(), cliente);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var updatedCliente = await response.Content.ReadAsAsync<Cliente>();
+                    return updatedCliente;
+                }
+                else
+                {
+                    throw new Exception("Erro ao atualizar cliente: " + response.StatusCode);
+                }
+            }
+        }
+
     }
 }

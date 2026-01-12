@@ -110,5 +110,17 @@ namespace WebMVC.Controllers
             };
         }
 
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                await _apiService.DeleteClienteAsync(id);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

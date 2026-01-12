@@ -78,5 +78,25 @@ namespace WebMVC.Services
                 }
             }
         }
+
+        public async Task DeleteClienteAsync(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(baseUrl + "/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json")
+                );
+
+                HttpResponseMessage response = await client.DeleteAsync(id.ToString());
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception("Erro ao excluir cliente: " + response.StatusCode);
+                }
+            }
+        }
+
     }
 }

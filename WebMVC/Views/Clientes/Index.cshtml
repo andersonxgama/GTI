@@ -151,7 +151,19 @@
                                  "Edit",
                                  "Clientes",
                                  new { id = cliente.Id },
-                                 new { @class = "btn btn-sm btn-outline-primary" }
+                                 new { @class = "btn btn-sm btn-outline-primary me-1" }
+                             )
+
+                        @Html.ActionLink(
+                                 "Excluir",
+                                 "Delete",
+                                 "Clientes",
+                                 new { id = cliente.Id },
+                                 new
+                                 {
+                                     @class = "btn btn-sm btn-outline-danger",
+                                     onclick = "return confirm('Tem certeza que deseja excluir?');"
+                                 }
                              )
                     </td>
                 </tr>

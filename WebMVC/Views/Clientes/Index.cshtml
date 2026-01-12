@@ -9,49 +9,56 @@
 <div class="container mt-4">
     <h2>Cliente</h2>
 
-    @using (Html.BeginForm("Create", "Clientes", FormMethod.Post, new { @id = "formCliente" }))
+    @using (Html.BeginForm("Create", "Clientes", FormMethod.Post))
     {
-        @* Campo escondido para o Id do cliente *@
-        <input type="hidden" name="Id" />
-
         <!-- CLIENTE -->
         <div class="row mb-3">
             <div class="col-md-4">
-                @Html.LabelFor(m => m.FirstOrDefault().CPF)
+                @Html.Label("CPF")
                 @Html.TextBox("CPF", null, new { @class = "form-control", maxlength = 14 })
             </div>
             <div class="col-md-8">
-                @Html.LabelFor(m => m.FirstOrDefault().Nome)
+                @Html.Label("Nome")
                 @Html.TextBox("Nome", null, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-2">
-                @Html.LabelFor(m => m.FirstOrDefault().RG)
+                @Html.Label("RG")
                 @Html.TextBox("RG", null, new { @class = "form-control", maxlength = 12 })
             </div>
             <div class="col-md-3">
-                @Html.LabelFor(m => m.FirstOrDefault().DataExpedicao)
-                @Html.TextBox("DataExpedicao", null, new { @type = "date", @class = "form-control" })
+                @Html.Label("DataExpedicao")
+                @Html.TextBox("DataExpedicao", null, new
+                {
+                    @type = "date",
+                    @class = "form-control",
+                    required = "required"
+                })
             </div>
             <div class="col-md-4">
-                @Html.LabelFor(m => m.FirstOrDefault().OrgaoExpedicao)
+                @Html.Label("OrgaoExpedicao")
                 @Html.TextBox("OrgaoExpedicao", null, new { @class = "form-control" })
             </div>
             <div class="col-md-3">
-                @Html.LabelFor(m => m.FirstOrDefault().UFExpedicao)
+                @Html.Label("UFExpedicao")
                 @Html.TextBox("UFExpedicao", null, new { @class = "form-control", maxlength = 2 })
             </div>
         </div>
 
         <div class="row mb-3">
             <div class="col-md-3">
-                @Html.LabelFor(m => m.FirstOrDefault().DataNascimento)
-                @Html.TextBox("DataNascimento", null, new { @type = "date", @class = "form-control" })
+                @Html.Label("DataNascimento")
+                @Html.TextBox("DataNascimento", null, new
+                {
+                    @type = "date",
+                    @class = "form-control",
+                    required = "required"
+                })
             </div>
             <div class="col-md-2">
-                @Html.LabelFor(m => m.FirstOrDefault().Sexo)
+                @Html.Label("Sexo")
                 @Html.DropDownList("Sexo", new List<SelectListItem>
                 {
                     new SelectListItem { Text = "Selecione", Value = "" },
@@ -60,43 +67,44 @@
                 }, new { @class = "form-control" })
             </div>
             <div class="col-md-3">
-                @Html.LabelFor(m => m.FirstOrDefault().EstadoCivil)
+                @Html.Label("EstadoCivil")
                 @Html.TextBox("EstadoCivil", null, new { @class = "form-control" })
             </div>
         </div>
 
         <!-- ENDEREÇO -->
         <h3>Endereço</h3>
+
         <div class="row mb-3">
             <div class="col-md-2">
-                @Html.LabelFor(m => m.FirstOrDefault().Endereco.CEP)
+                @Html.Label("CEP")
                 @Html.TextBox("Endereco.CEP", null, new { @class = "form-control", maxlength = 9 })
             </div>
             <div class="col-md-4">
-                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Logradouro)
+                @Html.Label("Logradouro")
                 @Html.TextBox("Endereco.Logradouro", null, new { @class = "form-control" })
             </div>
             <div class="col-md-1">
-                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Numero)
+                @Html.Label("Numero")
                 @Html.TextBox("Endereco.Numero", null, new { @class = "form-control" })
             </div>
             <div class="col-md-3">
-                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Complemento)
+                @Html.Label("Complemento")
                 @Html.TextBox("Endereco.Complemento", null, new { @class = "form-control" })
             </div>
             <div class="col-md-2">
-                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Bairro)
+                @Html.Label("Bairro")
                 @Html.TextBox("Endereco.Bairro", null, new { @class = "form-control" })
             </div>
         </div>
 
         <div class="row mb-4">
             <div class="col-md-4">
-                @Html.LabelFor(m => m.FirstOrDefault().Endereco.Cidade)
+                @Html.Label("Cidade")
                 @Html.TextBox("Endereco.Cidade", null, new { @class = "form-control" })
             </div>
             <div class="col-md-2">
-                @Html.LabelFor(m => m.FirstOrDefault().Endereco.UF)
+                @Html.Label("UF")
                 @Html.TextBox("Endereco.UF", null, new { @class = "form-control", maxlength = 2 })
             </div>
         </div>
@@ -106,17 +114,18 @@
 
     <hr />
 
-    <!-- GRID DE CLIENTES -->
+    <!-- GRID -->
     <h3>Clientes Cadastrados</h3>
+
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Nome)</th>
-                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().CPF)</th>
-                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().RG)</th>
-                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().DataNascimento)</th>
-                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().Sexo)</th>
-                <th>@Html.DisplayNameFor(m => m.FirstOrDefault().EstadoCivil)</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>RG</th>
+                <th>Data Nascimento</th>
+                <th>Sexo</th>
+                <th>Estado Civil</th>
                 <th>Endereço</th>
                 <th>Ações</th>
             </tr>
@@ -124,70 +133,29 @@
         <tbody>
             @foreach (var cliente in Model)
             {
-                <tr data-id="@cliente.Id"
-                    data-cpf="@cliente.CPF"
-                    data-nome="@cliente.Nome"
-                    data-rg="@cliente.RG"
-                    data-dataexpedicao="@cliente.DataExpedicao.ToString("yyyy-MM-dd")"
-                    data-orgao="@cliente.OrgaoExpedicao"
-                    data-ufexpedicao="@cliente.UFExpedicao"
-                    data-datanascimento="@cliente.DataNascimento.ToString("yyyy-MM-dd")"
-                    data-sexo="@cliente.Sexo"
-                    data-estadocivil="@cliente.EstadoCivil"
-                    data-cep="@cliente.Endereco?.CEP"
-                    data-logradouro="@cliente.Endereco?.Logradouro"
-                    data-numero="@cliente.Endereco?.Numero"
-                    data-complemento="@cliente.Endereco?.Complemento"
-                    data-bairro="@cliente.Endereco?.Bairro"
-                    data-cidade="@cliente.Endereco?.Cidade"
-                    data-uf="@cliente.Endereco?.UF">
-                    <td>@Html.DisplayFor(mItem => cliente.Nome)</td>
-                    <td>@Html.DisplayFor(mItem => cliente.CPF)</td>
-                    <td>@Html.DisplayFor(mItem => cliente.RG)</td>
+                <tr>
+                    <td>@cliente.Nome</td>
+                    <td>@cliente.CPF</td>
+                    <td>@cliente.RG</td>
                     <td>@cliente.DataNascimento.ToString("dd/MM/yyyy")</td>
-                    <td>@Html.DisplayFor(mItem => cliente.Sexo)</td>
-                    <td>@Html.DisplayFor(mItem => cliente.EstadoCivil)</td>
+                    <td>@cliente.Sexo</td>
+                    <td>@cliente.EstadoCivil</td>
                     <td>
-                        @(cliente.Endereco != null ? $"{cliente.Endereco.Logradouro}, {cliente.Endereco.Numero}, {cliente.Endereco.Bairro}, {cliente.Endereco.Cidade} - {cliente.Endereco.UF}" : "")
+                        @(cliente.Endereco != null
+                            ? $"{cliente.Endereco.Logradouro}, {cliente.Endereco.Numero}, {cliente.Endereco.Bairro}, {cliente.Endereco.Cidade} - {cliente.Endereco.UF}"
+                            : "")
                     </td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-primary btnEditar">Editar</button>
-                        <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                        @Html.ActionLink(
+                                 "Editar",
+                                 "Edit",
+                                 "Clientes",
+                                 new { id = cliente.Id },
+                                 new { @class = "btn btn-sm btn-outline-primary" }
+                             )
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
-@section scripts {
-    <script>
-        document.querySelectorAll(".btnEditar").forEach(btn => {
-            btn.addEventListener("click", function () {
-                const row = btn.closest("tr");
-                const form = document.getElementById("formCliente");
-
-                form.querySelector("input[name='Id']").value = row.dataset.id;
-                form.querySelector("input[name='CPF']").value = row.dataset.cpf;
-                form.querySelector("input[name='Nome']").value = row.dataset.nome;
-                form.querySelector("input[name='RG']").value = row.dataset.rg;
-                form.querySelector("input[name='DataExpedicao']").value = row.dataset.dataexpedicao;
-                form.querySelector("input[name='OrgaoExpedicao']").value = row.dataset.orgao;
-                form.querySelector("input[name='UFExpedicao']").value = row.dataset.ufexpedicao;
-                form.querySelector("input[name='DataNascimento']").value = row.dataset.datanascimento;
-                form.querySelector("select[name='Sexo']").value = row.dataset.sexo;
-                form.querySelector("input[name='EstadoCivil']").value = row.dataset.estadocivil;
-                form.querySelector("input[name='Endereco.CEP']").value = row.dataset.cep;
-                form.querySelector("input[name='Endereco.Logradouro']").value = row.dataset.logradouro;
-                form.querySelector("input[name='Endereco.Numero']").value = row.dataset.numero;
-                form.querySelector("input[name='Endereco.Complemento']").value = row.dataset.complemento;
-                form.querySelector("input[name='Endereco.Bairro']").value = row.dataset.bairro;
-                form.querySelector("input[name='Endereco.Cidade']").value = row.dataset.cidade;
-                form.querySelector("input[name='Endereco.UF']").value = row.dataset.uf;
-
-                // Muda a action do form pra Edit
-                form.action = '/Clientes/Edit';
-            });
-        });
-    </script>
-}

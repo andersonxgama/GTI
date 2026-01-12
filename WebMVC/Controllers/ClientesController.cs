@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using WebMVC.Models;
@@ -17,16 +18,8 @@ namespace WebMVC.Controllers
 
         public async Task<ActionResult> Index()
         {
-            try
-            {
-                var clientes = await _apiService.GetClientesAsync();
-                return View(clientes);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Error = "Erro ao acessar a API: " + ex.Message;
-                return View();
-            }
+            var clientes = await _apiService.GetClientesAsync();
+            return View(clientes);
         }
 
         [HttpPost]
@@ -34,83 +27,86 @@ namespace WebMVC.Controllers
         {
             try
             {
-                // Criando cliente manualmente a partir do formulário
-                var cliente = new Cliente
-                {
-                    CPF = form["CPF"]?.Trim(),
-                    Nome = form["Nome"]?.Trim(),
-                    RG = form["RG"]?.Trim(),
-                    DataExpedicao = DateTime.Parse(form["DataExpedicao"]),
-                    OrgaoExpedicao = form["OrgaoExpedicao"]?.Trim(),
-                    UFExpedicao = form["UFExpedicao"]?.Trim().ToUpper(),
-                    DataNascimento = DateTime.Parse(form["DataNascimento"]),
-                    Sexo = form["Sexo"]?.Trim(),
-                    EstadoCivil = form["EstadoCivil"]?.Trim(),
-                    Endereco = new Endereco
-                    {
-                        CEP = form["Endereco.CEP"]?.Trim(),
-                        Logradouro = form["Endereco.Logradouro"]?.Trim(),
-                        Numero = form["Endereco.Numero"]?.Trim(),
-                        Complemento = form["Endereco.Complemento"]?.Trim(),
-                        Bairro = form["Endereco.Bairro"]?.Trim(),
-                        Cidade = form["Endereco.Cidade"]?.Trim(),
-                        UF = form["Endereco.UF"]?.Trim().ToUpper()
-                    }
-                };
+                var cliente = RetornarCliente(form);
+
+                if (cliente.Endereco != null)
+                    cliente.Endereco.Cliente = cliente;
 
                 await _apiService.CreateClienteAsync(cliente);
-
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch
             {
-                ViewBag.Error = "Erro ao criar cliente: " + ex.Message;
-                var clientes = await _apiService.GetClientesAsync();
-                return View("Index", clientes);
+                return RedirectToAction("Index");
             }
         }
 
+        public async Task<ActionResult> Edit(int id)
+        {
+            var clientes = await _apiService.GetClientesAsync();
+            var cliente = clientes.FirstOrDefault(c => c.Id == id);
+
+            if (cliente == null)
+                return RedirectToAction("Index");
+
+            return View(cliente);
+        }
+
         [HttpPost]
-        public async Task<ActionResult> Edit(Cliente cliente)
+        public async Task<ActionResult> Edit(FormCollection form)
         {
             try
             {
-                if (cliente == null || cliente.Id == 0)
-                {
-                    ViewBag.Error = "Cliente inválido para edição.";
-                    var clientes = await _apiService.GetClientesAsync();
-                    return View("Index", clientes);
-                }
-
-                // Ajusta os trims igual no Create
-                cliente.CPF = cliente.CPF?.Trim();
-                cliente.RG = cliente.RG?.Trim();
-                cliente.Nome = cliente.Nome?.Trim();
-                cliente.OrgaoExpedicao = cliente.OrgaoExpedicao?.Trim();
-                cliente.UFExpedicao = cliente.UFExpedicao?.Trim().ToUpper();
-                cliente.EstadoCivil = cliente.EstadoCivil?.Trim();
-
-                if (cliente.Endereco != null)
-                {
-                    cliente.Endereco.CEP = cliente.Endereco.CEP?.Trim();
-                    cliente.Endereco.Logradouro = cliente.Endereco.Logradouro?.Trim();
-                    cliente.Endereco.Numero = cliente.Endereco.Numero?.Trim();
-                    cliente.Endereco.Complemento = cliente.Endereco.Complemento?.Trim();
-                    cliente.Endereco.Bairro = cliente.Endereco.Bairro?.Trim();
-                    cliente.Endereco.Cidade = cliente.Endereco.Cidade?.Trim();
-                    cliente.Endereco.UF = cliente.Endereco.UF?.Trim().ToUpper();
-                }
+                var cliente = RetornarCliente(form);
+                cliente.Id = int.Parse(form["Id"]);
+                cliente.Endereco.ClienteId = cliente.Id;
 
                 await _apiService.UpdateClienteAsync(cliente);
-
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch
             {
-                ViewBag.Error = "Erro ao editar cliente: " + ex.Message;
-                var clientes = await _apiService.GetClientesAsync();
-                return View("Index", clientes);
+                return RedirectToAction("Index");
             }
+        }
+
+        private Cliente RetornarCliente(FormCollection form)
+        {
+            DateTime dataExpedicao = DateTime.Now;
+            DateTime dataNascimento = DateTime.Now;
+
+            DateTime.TryParse(form["DataExpedicao"], out dataExpedicao);
+            DateTime.TryParse(form["DataNascimento"], out dataNascimento);
+
+            Endereco endereco = null;
+
+            if (!string.IsNullOrWhiteSpace(form["Endereco.CEP"]))
+            {
+                endereco = new Endereco
+                {
+                    CEP = form["Endereco.CEP"],
+                    Logradouro = form["Endereco.Logradouro"],
+                    Numero = form["Endereco.Numero"],
+                    Complemento = form["Endereco.Complemento"],
+                    Bairro = form["Endereco.Bairro"],
+                    Cidade = form["Endereco.Cidade"],
+                    UF = form["Endereco.UF"]
+                };
+            }
+
+            return new Cliente
+            {
+                CPF = form["CPF"],
+                Nome = form["Nome"],
+                RG = form["RG"],
+                DataExpedicao = dataExpedicao,
+                OrgaoExpedicao = form["OrgaoExpedicao"],
+                UFExpedicao = form["UFExpedicao"],
+                DataNascimento = dataNascimento,
+                Sexo = form["Sexo"],
+                EstadoCivil = form["EstadoCivil"],
+                Endereco = endereco
+            };
         }
 
     }

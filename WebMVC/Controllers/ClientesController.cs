@@ -53,18 +53,19 @@ namespace WebMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(FormCollection form)
+        public async Task<ActionResult> Edit(Cliente cliente)
         {
             try
             {
-                var cliente = RetornarCliente(form);
-                cliente.Id = int.Parse(form["Id"]);
-                cliente.Endereco.ClienteId = cliente.Id;
+                if (cliente.Endereco != null)
+                {
+                    cliente.Endereco.ClienteId = cliente.Id;
+                }
 
                 await _apiService.UpdateClienteAsync(cliente);
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception e)
             {
                 return RedirectToAction("Index");
             }

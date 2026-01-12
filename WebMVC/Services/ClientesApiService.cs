@@ -59,16 +59,18 @@ namespace WebMVC.Services
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(baseUrl);
+                client.BaseAddress = new Uri(baseUrl + "/");
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Accept.Add(
+                    new MediaTypeWithQualityHeaderValue("application/json")
+                );
 
-                HttpResponseMessage response = await client.PutAsJsonAsync(cliente.Id.ToString(), cliente);
+                HttpResponseMessage response =
+                    await client.PutAsJsonAsync(cliente.Id.ToString(), cliente);
 
                 if (response.IsSuccessStatusCode)
                 {
-                    var updatedCliente = await response.Content.ReadAsAsync<Cliente>();
-                    return updatedCliente;
+                    return await response.Content.ReadAsAsync<Cliente>();
                 }
                 else
                 {
@@ -76,6 +78,5 @@ namespace WebMVC.Services
                 }
             }
         }
-
     }
 }
